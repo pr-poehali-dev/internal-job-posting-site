@@ -140,7 +140,7 @@ const notifIcon = (type: string) => {
   return "Star";
 };
 const notifColor = (type: string) => {
-  if (type === "match") return "text-blue-500 bg-blue-50";
+  if (type === "match") return "text-primary bg-primary/10";
   if (type === "status") return "text-green-500 bg-green-50";
   if (type === "alert") return "text-amber-500 bg-amber-50";
   return "text-violet-500 bg-violet-50";
@@ -173,7 +173,7 @@ function JobDrawer({ job, onClose, onApply }: { job: Job; onClose: () => void; o
         <div className="flex flex-col h-full bg-white/95 backdrop-blur-xl border-l border-border overflow-hidden">
 
           {/* Header */}
-          <div className="flex-shrink-0 p-6 border-b border-border bg-gradient-to-r from-blue-50/60 to-transparent">
+          <div className="flex-shrink-0 p-6 border-b border-border bg-gradient-to-r from-primary/5 to-transparent">
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -183,7 +183,7 @@ function JobDrawer({ job, onClose, onApply }: { job: Job; onClose: () => void; o
                     </span>
                   )}
                   <span className="text-xs font-medium text-muted-foreground bg-secondary px-2.5 py-0.5 rounded-full">{job.department}</span>
-                  <span className="text-xs font-medium text-primary bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full">{job.level}</span>
+                  <span className="text-xs font-medium text-primary bg-primary/5 border border-primary/20 px-2.5 py-0.5 rounded-full">{job.level}</span>
                 </div>
                 <h2 className="font-montserrat font-black text-2xl text-foreground leading-tight">{job.title}</h2>
               </div>
@@ -393,7 +393,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
       <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
         <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-slide-up border border-border" style={{ maxHeight: "90vh", overflowY: "auto" }}>
           {/* Header */}
-          <div className="p-6 border-b border-border bg-gradient-to-r from-blue-50/60 to-transparent">
+          <div className="p-6 border-b border-border bg-gradient-to-r from-primary/5 to-transparent">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-xs text-muted-foreground font-medium mb-1">Отклик на вакансию</p>
@@ -407,7 +407,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
 
           <div className="p-6 space-y-5">
             {/* Данные сотрудника */}
-            <div className="glass rounded-xl p-4 border border-blue-100 bg-blue-50/40">
+            <div className="glass rounded-xl p-4 border border-primary/20 bg-primary/5">
               <div className="flex items-center gap-2 mb-3">
                 <Icon name="User" size={14} className="text-primary" />
                 <p className="text-xs font-semibold text-primary">Ваши данные</p>
@@ -448,7 +448,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
             <div>
               <label className="text-sm font-semibold text-foreground mb-2 block">Прикрепить резюме</label>
               <label className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-6 cursor-pointer transition-all ${
-                resumeFile ? "border-primary/50 bg-blue-50/50" : "border-border hover:border-primary/40 hover:bg-muted/50"
+                resumeFile ? "border-primary/50 bg-primary/5" : "border-border hover:border-primary/40 hover:bg-muted/50"
               }`}>
                 <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={e => setResumeFile(e.target.files?.[0] || null)} />
                 {resumeFile ? (
@@ -810,7 +810,7 @@ export default function Index() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 glass rounded-2xl p-6 border border-primary/20 bg-gradient-to-br from-blue-50/50 to-transparent">
+            <div className="mt-8 glass rounded-2xl p-6 border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
                   <Icon name="Bell" size={18} className="text-white" />
