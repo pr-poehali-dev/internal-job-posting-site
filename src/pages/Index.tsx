@@ -302,11 +302,17 @@ function JobDrawer({ job, onClose, onApply }: { job: Job; onClose: () => void; o
   );
 }
 
+const SEND_APPLY_URL = "https://functions.poehali.dev/10bd6eb1-3344-431e-bb69-dfa02f4a8437";
+
 // ─── Apply Modal ─────────────────────────────────────────────────────
 function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [comment, setComment] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [department, setDepartment] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -314,10 +320,50 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
   }, []);
 
   const handleSubmit = async () => {
+    if (!fullName.trim() || !email.trim()) {
+      setErrorMsg("Укажите ФИО и email");
+      return;
+    }
+    setErrorMsg("");
     setStatus("sending");
-    // Имитация отправки — заменится на реальный бэкенд
-    await new Promise(r => setTimeout(r, 1800));
-    setStatus("success");
+
+    let resume_base64 = "";
+    let resume_filename = "";
+    if (resumeFile) {
+      const buf = await resumeFile.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      let binary = "";
+      bytes.forEach(b => { binary += String.fromCharCode(b); });
+      resume_base64 = btoa(binary);
+      resume_filename = resumeFile.name;
+    }
+
+    try {
+      const res = await fetch(SEND_APPLY_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          job_title: job.title,
+          recruiter_email: job.recruiterEmail,
+          full_name: fullName,
+          email,
+          department,
+          comment,
+          resume_base64,
+          resume_filename,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error || "Ошибка отправки. Попробуйте позже.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMsg("Нет соединения. Проверьте интернет и попробуйте снова.");
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -345,7 +391,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
     <>
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" onClick={onClose} />
       <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
-        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-slide-up border border-border">
+        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-slide-up border border-border" style={{ maxHeight: "90vh", overflowY: "auto" }}>
           {/* Header */}
           <div className="p-6 border-b border-border bg-gradient-to-r from-blue-50/60 to-transparent">
             <div className="flex items-start justify-between">
@@ -360,24 +406,40 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
           </div>
 
           <div className="p-6 space-y-5">
-            {/* LDAP info block */}
+            {/* Данные сотрудника */}
             <div className="glass rounded-xl p-4 border border-blue-100 bg-blue-50/40">
               <div className="flex items-center gap-2 mb-3">
                 <Icon name="User" size={14} className="text-primary" />
-                <p className="text-xs font-semibold text-primary">Данные из корпоративной системы</p>
+                <p className="text-xs font-semibold text-primary">Ваши данные</p>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground w-20">ФИО:</span>
-                  <span className="text-sm font-medium text-foreground">Загружается из LDAP...</span>
+              <div className="space-y-3">
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">ФИО <span className="text-red-400">*</span></label>
+                  <input
+                    value={fullName}
+                    onChange={e => setFullName(e.target.value)}
+                    placeholder="Иванов Иван Иванович"
+                    className="w-full bg-white border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground w-20">Email:</span>
-                  <span className="text-sm font-medium text-foreground">Загружается из LDAP...</span>
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Корпоративный email <span className="text-red-400">*</span></label>
+                  <input
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="i.ivanov@company.ru"
+                    type="email"
+                    className="w-full bg-white border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground w-20">Отдел:</span>
-                  <span className="text-sm font-medium text-foreground">Загружается из LDAP...</span>
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Подразделение</label>
+                  <input
+                    value={department}
+                    onChange={e => setDepartment(e.target.value)}
+                    placeholder="Например: Разработка"
+                    className="w-full bg-white border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+                  />
                 </div>
               </div>
             </div>
@@ -417,6 +479,14 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
               />
             </div>
 
+            {/* Error */}
+            {(status === "error" || errorMsg) && (
+              <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                <Icon name="AlertCircle" size={16} className="flex-shrink-0" />
+                {errorMsg || "Ошибка отправки. Попробуйте позже."}
+              </div>
+            )}
+
             {/* Submit */}
             <button
               onClick={handleSubmit}
@@ -437,7 +507,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
             </button>
 
             <p className="text-xs text-center text-muted-foreground">
-              Письмо будет отправлено рекрутеру <strong>{job.recruiter}</strong> с темой «{job.title}»
+              Письмо уйдёт на <strong>vacancy@company.company</strong> с темой «{job.title}»
             </p>
           </div>
         </div>

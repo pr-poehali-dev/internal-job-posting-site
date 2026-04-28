@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Missing SMTP config returns 503",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "job_title": "Senior Developer",
+        "full_name": "Иван Иванов",
+        "email": "test@test.ru",
+        "department": "Разработка",
+        "comment": "Хочу работать у вас"
+      },
+      "expectedStatus": 503
+    }
+  ]
+}
