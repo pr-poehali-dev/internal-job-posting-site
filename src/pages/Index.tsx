@@ -579,47 +579,13 @@ export default function Index() {
               <span className="font-montserrat font-extrabold text-lg text-primary ml-1">портал</span>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-1">
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-                }`}
-              >
-                <Icon name={tab.icon} size={16} />
-                {tab.label}
-                {tab.count ? (
-                  <span className={`text-xs rounded-full px-1.5 py-0.5 font-bold leading-none ${activeTab === tab.id ? "bg-white text-primary" : "bg-primary text-white"}`}>
-                    {tab.count}
-                  </span>
-                ) : null}
-              </button>
-            ))}
-          </nav>
+
           <div className="flex items-center gap-2">
             <div className="status-dot" />
             <span className="text-xs text-muted-foreground hidden sm:block">Обновлено сегодня</span>
           </div>
         </div>
-        <div className="md:hidden flex border-t border-border/40">
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 flex flex-col items-center gap-0.5 py-2 text-[10px] font-medium transition-colors ${activeTab === tab.id ? "text-primary" : "text-muted-foreground"}`}
-            >
-              <div className="relative">
-                <Icon name={tab.icon} size={18} />
-                {tab.count ? (
-                  <span className="absolute -top-1.5 -right-1.5 text-[9px] bg-primary text-white rounded-full w-4 h-4 flex items-center justify-center font-bold">{tab.count}</span>
-                ) : null}
-              </div>
-              {tab.label}
-            </button>
-          ))}
-        </div>
+
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
