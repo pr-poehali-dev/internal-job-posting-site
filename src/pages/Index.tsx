@@ -561,9 +561,7 @@ export default function Index() {
           <span className="text-[11px] text-muted-foreground">{job.posted}</span>
         </div>
       </div>
-      <div className="mt-3 flex items-center gap-1.5 text-xs text-primary font-medium">
-        <Icon name="Eye" size={12} /> Подробнее
-      </div>
+
     </div>
   );
 
