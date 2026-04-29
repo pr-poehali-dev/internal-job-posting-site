@@ -593,21 +593,11 @@ export default function Index() {
         {/* ══ ВАКАНСИИ ══ */}
         {activeTab === "jobs" && (
           <div className="animate-fade-in">
-            <div className="relative rounded-3xl overflow-hidden mb-8 bg-white" style={{ minHeight: 220 }}>
-              {/* Декоративный фон: два пересекающихся скруглённых прямоугольника */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                {/* Прямой скруглённый прямоугольник */}
-                <rect x="380" y="-30" width="320" height="280" rx="48" fill="#03BE93" opacity="0.9" />
-                {/* Наклонный параллелограмм */}
-                <rect x="300" y="-60" width="220" height="300" rx="48" fill="#038073" opacity="0.85" transform="rotate(-12 400 110)" />
-              </svg>
-              {/* Текст поверх */}
-              <div className="relative z-10 px-8 py-12 max-w-lg">
-                <h1 className="font-montserrat font-black text-4xl sm:text-5xl text-foreground mb-3 tracking-tight leading-tight">
-                  Найди работу,<br /><span className="text-primary">которая вдохновляет</span>
-                </h1>
-                <p className="text-muted-foreground text-lg">{JOBS.length} открытых позиций</p>
-              </div>
+            <div className="text-center mb-8 pt-4">
+              <h1 className="font-montserrat font-black text-4xl sm:text-5xl text-foreground mb-3 tracking-tight">
+                Найди работу,<br /><span className="text-primary">которая вдохновляет</span>
+              </h1>
+              <p className="text-muted-foreground text-lg">{JOBS.length} открытых позиций</p>
             </div>
 
             <div className="glass rounded-2xl p-3 mb-6 shadow-sm flex gap-3 items-center border border-white/60">
