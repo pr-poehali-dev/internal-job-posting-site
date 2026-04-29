@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Login success",
+      "method": "POST",
+      "path": "/",
+      "body": {"login": "admin", "password": "admin"},
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true, "token": "admin-secret-token-2024"},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Login fail",
+      "method": "POST",
+      "path": "/",
+      "body": {"login": "wrong", "password": "wrong"},
+      "expectedStatus": 401,
+      "expectedBody": {"ok": false},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

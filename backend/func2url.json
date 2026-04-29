@@ -1,3 +1,5 @@
 {
+  "jobs-api": "https://functions.poehali.dev/ee3bdaa2-a07e-40cc-8345-5807fa219ae8",
+  "admin-auth": "https://functions.poehali.dev/ca652d09-96c4-4e3d-83a9-377469383b3c",
   "send-apply": "https://functions.poehali.dev/10bd6eb1-3344-431e-bb69-dfa02f4a8437"
 }

@@ -494,6 +494,8 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
   );
 }
 
+const JOBS_API_URL = "https://functions.poehali.dev/ee3bdaa2-a07e-40cc-8345-5807fa219ae8";
+
 // ─── Main Page ───────────────────────────────────────────────────────
 export default function Index() {
   const [activeTab, setActiveTab] = useState("jobs");
@@ -505,8 +507,16 @@ export default function Index() {
   const [workMode, setWorkMode] = useState("Все форматы");
   const [drawerJob, setDrawerJob] = useState<Job | null>(null);
   const [applyJob, setApplyJob] = useState<Job | null>(null);
+  const [allJobs, setAllJobs] = useState<Job[]>(JOBS);
 
-  const filtered = JOBS.filter(j => {
+  useEffect(() => {
+    fetch(JOBS_API_URL)
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data) && data.length > 0) setAllJobs(data); })
+      .catch(() => {});
+  }, []);
+
+  const filtered = allJobs.filter(j => {
     const q = search.toLowerCase();
     const matchSearch = !q || j.title.toLowerCase().includes(q) || j.desc.toLowerCase().includes(q) || j.tags.some(t => t.toLowerCase().includes(q));
     const matchDept = dept === "Все подразделения" || j.department === dept;
@@ -593,7 +603,7 @@ export default function Index() {
               <h1 className="font-montserrat font-black text-4xl sm:text-5xl text-foreground mb-3 tracking-tight">
                 Найди работу,<br /><span className="text-primary">которая вдохновляет</span>
               </h1>
-              <p className="text-muted-foreground text-lg">{JOBS.length} открытых позиций</p>
+              <p className="text-muted-foreground text-lg">{allJobs.length} открытых позиций</p>
             </div>
 
             <div className="glass rounded-2xl p-3 mb-6 shadow-sm flex gap-3 items-center border border-white/60">
