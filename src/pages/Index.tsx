@@ -193,11 +193,7 @@ function JobDrawer({ job, onClose, onApply }: { job: Job; onClose: () => void; o
               </div>
             </div>
 
-            {/* Salary */}
-            <div className="mt-4 inline-flex items-center gap-2 bg-green-50 border border-green-100 px-4 py-2 rounded-xl">
-              <Icon name="Banknote" size={16} className="text-green-600" />
-              <span className="font-montserrat font-bold text-green-700 text-lg">{job.salary}</span>
-            </div>
+
           </div>
 
           {/* Scrollable body */}
