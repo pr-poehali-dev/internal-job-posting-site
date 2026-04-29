@@ -4,13 +4,15 @@ import Icon from "@/components/ui/icon";
 const DEPARTMENTS = ["Все подразделения", "Разработка", "Маркетинг", "Продажи", "HR", "Финансы", "Операции"];
 const LEVELS = ["Все уровни", "Junior", "Middle", "Senior", "Lead", "Director"];
 const ROLES = ["Все должности", "Разработчик", "Дизайнер", "Аналитик", "Менеджер", "Маркетолог"];
+const CITIES = ["Все города", "Москва", "Санкт-Петербург", "Любой город"];
+const WORK_MODES = ["Все форматы", "Офис", "Удалённо", "Гибрид", "Вахта"];
 
 const JOBS = [
   {
     id: 1,
     title: "Senior Frontend Developer",
     department: "Разработка", level: "Senior", role: "Разработчик",
-    location: "Москва / Remote", salary: "300 000 — 420 000 ₽", posted: "2 дня назад", hot: true,
+    location: "Москва / Remote", city: "Москва", workMode: "Гибрид", salary: "300 000 — 420 000 ₽", posted: "2 дня назад", hot: true,
     tags: ["React", "TypeScript", "GraphQL"],
     desc: "Ищем опытного фронтенд-разработчика для работы над нашим флагманским продуктом.",
     fullDesc: "Мы ищем Senior Frontend Developer, который станет ключевым участником команды разработки. Вы будете работать над архитектурой SPA-приложений, внедрять лучшие практики и менторить Junior-разработчиков. Наш продукт используют более 500 000 пользователей ежемесячно.",
@@ -24,7 +26,7 @@ const JOBS = [
     id: 2,
     title: "Product Marketing Manager",
     department: "Маркетинг", level: "Middle", role: "Маркетолог",
-    location: "Москва", salary: "180 000 — 240 000 ₽", posted: "1 день назад", hot: true,
+    location: "Москва", city: "Москва", workMode: "Офис", salary: "180 000 — 240 000 ₽", posted: "1 день назад", hot: true,
     tags: ["GTM", "B2B", "SaaS"],
     desc: "Развивайте продуктовый маркетинг и помогайте нам выходить на новые рынки.",
     fullDesc: "Ищем Product Marketing Manager для развития B2B-направления. Вы будете отвечать за позиционирование продукта, разработку go-to-market стратегий и работу с командой продаж. Мы активно выходим на рынки СНГ и Европы.",
@@ -38,7 +40,7 @@ const JOBS = [
     id: 3,
     title: "Lead Data Analyst",
     department: "Финансы", level: "Lead", role: "Аналитик",
-    location: "Санкт-Петербург / Hybrid", salary: "260 000 — 350 000 ₽", posted: "3 дня назад", hot: false,
+    location: "Санкт-Петербург / Hybrid", city: "Санкт-Петербург", workMode: "Гибрид", salary: "260 000 — 350 000 ₽", posted: "3 дня назад", hot: false,
     tags: ["SQL", "Python", "Tableau"],
     desc: "Возглавьте команду аналитиков и формируйте data-driven культуру в компании.",
     fullDesc: "Мы ищем опытного Lead Data Analyst, который выстроит аналитическую инфраструктуру компании и поможет бизнесу принимать решения на основе данных. В подчинении 3 аналитика, плотная работа с финансовым блоком и C-level.",
@@ -52,7 +54,7 @@ const JOBS = [
     id: 4,
     title: "HR Business Partner",
     department: "HR", level: "Middle", role: "Менеджер",
-    location: "Remote", salary: "150 000 — 200 000 ₽", posted: "5 дней назад", hot: false,
+    location: "Remote", city: "Любой город", workMode: "Удалённо", salary: "150 000 — 200 000 ₽", posted: "5 дней назад", hot: false,
     tags: ["HRBP", "OKR", "People Ops"],
     desc: "Станьте стратегическим партнёром бизнес-подразделений в области управления людьми.",
     fullDesc: "HRBP для работы с командами разработки и продуктовым департаментом (150+ сотрудников). Вы будете сопровождать руководителей в вопросах HR, внедрять OKR, вести Performance Review и развивать корпоративную культуру.",
@@ -66,7 +68,7 @@ const JOBS = [
     id: 5,
     title: "Junior iOS Developer",
     department: "Разработка", level: "Junior", role: "Разработчик",
-    location: "Москва", salary: "100 000 — 140 000 ₽", posted: "Сегодня", hot: true,
+    location: "Москва", city: "Москва", workMode: "Офис", salary: "100 000 — 140 000 ₽", posted: "Сегодня", hot: true,
     tags: ["Swift", "UIKit", "SwiftUI"],
     desc: "Отличная возможность для начала карьеры в мобильной разработке.",
     fullDesc: "Открываем позицию Junior iOS Developer для выпускников и разработчиков с коммерческим опытом до 1 года. Вы будете работать в паре с Senior-разработчиком, участвовать в code review и быстро расти внутри компании.",
@@ -80,7 +82,7 @@ const JOBS = [
     id: 6,
     title: "Account Director",
     department: "Продажи", level: "Director", role: "Менеджер",
-    location: "Москва / Remote", salary: "400 000 — 600 000 ₽", posted: "1 неделю назад", hot: false,
+    location: "Москва / Remote", city: "Москва", workMode: "Гибрид", salary: "400 000 — 600 000 ₽", posted: "1 неделю назад", hot: false,
     tags: ["Enterprise", "B2B", "CRM"],
     desc: "Управляйте ключевыми клиентами и стройте долгосрочные партнёрства.",
     fullDesc: "Account Director для управления портфелем Enterprise-клиентов с оборотом 500+ млн ₽. Вы будете выстраивать стратегические отношения с C-level клиентов, развивать аккаунты и участвовать в разработке коммерческой стратегии компании.",
@@ -94,7 +96,7 @@ const JOBS = [
     id: 7,
     title: "UX/UI Designer",
     department: "Разработка", level: "Middle", role: "Дизайнер",
-    location: "Remote", salary: "170 000 — 230 000 ₽", posted: "4 дня назад", hot: false,
+    location: "Remote", city: "Любой город", workMode: "Удалённо", salary: "170 000 — 230 000 ₽", posted: "4 дня назад", hot: false,
     tags: ["Figma", "Research", "Design System"],
     desc: "Создавайте интерфейсы, которыми пользуются миллионы людей каждый день.",
     fullDesc: "Ищем UX/UI Designer для работы над несколькими продуктами компании. Вы будете проводить UX-исследования, разрабатывать пользовательские сценарии, создавать прототипы и поддерживать Design System. Тесное взаимодействие с product и разработкой.",
@@ -108,7 +110,7 @@ const JOBS = [
     id: 8,
     title: "Operations Manager",
     department: "Операции", level: "Middle", role: "Менеджер",
-    location: "Санкт-Петербург", salary: "160 000 — 210 000 ₽", posted: "2 дня назад", hot: false,
+    location: "Санкт-Петербург", city: "Санкт-Петербург", workMode: "Офис", salary: "160 000 — 210 000 ₽", posted: "2 дня назад", hot: false,
     tags: ["Process", "Lean", "KPI"],
     desc: "Оптимизируйте бизнес-процессы и повышайте операционную эффективность.",
     fullDesc: "Operations Manager для управления операционными процессами в петербургском офисе. Вы будете описывать и автоматизировать бизнес-процессы, внедрять Lean-подходы и строить систему KPI для операционного блока.",
@@ -176,6 +178,10 @@ function JobDrawer({ job, onClose, onApply }: { job: Job; onClose: () => void; o
               <div className="flex items-center gap-1.5">
                 <Icon name="MapPin" size={14} className="text-primary" />
                 {job.location}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Icon name="Monitor" size={14} className="text-primary" />
+                {job.workMode}
               </div>
               <div className="flex items-center gap-1.5">
                 <Icon name="Clock" size={14} className="text-primary" />
@@ -499,6 +505,8 @@ export default function Index() {
   const [dept, setDept] = useState("Все подразделения");
   const [level, setLevel] = useState("Все уровни");
   const [role, setRole] = useState("Все должности");
+  const [city, setCity] = useState("Все города");
+  const [workMode, setWorkMode] = useState("Все форматы");
   const [drawerJob, setDrawerJob] = useState<Job | null>(null);
   const [applyJob, setApplyJob] = useState<Job | null>(null);
 
@@ -508,7 +516,9 @@ export default function Index() {
     const matchDept = dept === "Все подразделения" || j.department === dept;
     const matchLevel = level === "Все уровни" || j.level === level;
     const matchRole = role === "Все должности" || j.role === role;
-    return matchSearch && matchDept && matchLevel && matchRole;
+    const matchCity = city === "Все города" || j.city === city;
+    const matchWorkMode = workMode === "Все форматы" || j.workMode === workMode;
+    return matchSearch && matchDept && matchLevel && matchRole && matchCity && matchWorkMode;
   });
 
   const tabs = [
@@ -544,9 +554,10 @@ export default function Index() {
           <Icon name="MapPin" size={12} /><span>{job.location}</span>
           <span className="mx-1 opacity-40">·</span>
           <Icon name="TrendingUp" size={12} /><span className="text-primary font-medium">{job.level}</span>
+          <span className="mx-1 opacity-40">·</span>
+          <Icon name="Monitor" size={12} /><span>{job.workMode}</span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-bold text-foreground">{job.salary}</span>
+        <div className="flex items-center justify-end">
           <span className="text-[11px] text-muted-foreground">{job.posted}</span>
         </div>
       </div>
@@ -622,7 +633,7 @@ export default function Index() {
               <h1 className="font-montserrat font-black text-4xl sm:text-5xl text-foreground mb-3 tracking-tight">
                 Найди работу,<br /><span className="text-primary">которая вдохновляет</span>
               </h1>
-              <p className="text-muted-foreground text-lg">{JOBS.length} открытых позиций · Обновляется каждый день</p>
+              <p className="text-muted-foreground text-lg">{JOBS.length} открытых позиций</p>
             </div>
 
             <div className="glass rounded-2xl p-3 mb-6 shadow-sm flex gap-3 items-center border border-white/60">
@@ -636,9 +647,6 @@ export default function Index() {
                 />
                 {search && <button onClick={() => setSearch("")} className="text-muted-foreground hover:text-foreground"><Icon name="X" size={14} /></button>}
               </div>
-              <button className="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-primary/90 transition-all duration-200 shadow-sm flex items-center gap-2 whitespace-nowrap">
-                <Icon name="Search" size={15} /> Найти
-              </button>
             </div>
 
             <div className="flex flex-wrap gap-3 mb-8">
@@ -646,6 +654,8 @@ export default function Index() {
                 { value: dept, setter: setDept, options: DEPARTMENTS, icon: "Building2" },
                 { value: role, setter: setRole, options: ROLES, icon: "UserCheck" },
                 { value: level, setter: setLevel, options: LEVELS, icon: "TrendingUp" },
+                { value: city, setter: setCity, options: CITIES, icon: "MapPin" },
+                { value: workMode, setter: setWorkMode, options: WORK_MODES, icon: "Monitor" },
               ].map((filter, i) => (
                 <div key={i} className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none z-10">
@@ -661,9 +671,9 @@ export default function Index() {
                   </select>
                 </div>
               ))}
-              {(dept !== "Все подразделения" || level !== "Все уровни" || role !== "Все должности" || search) && (
+              {(dept !== "Все подразделения" || level !== "Все уровни" || role !== "Все должности" || city !== "Все города" || workMode !== "Все форматы" || search) && (
                 <button
-                  onClick={() => { setDept("Все подразделения"); setLevel("Все уровни"); setRole("Все должности"); setSearch(""); }}
+                  onClick={() => { setDept("Все подразделения"); setLevel("Все уровни"); setRole("Все должности"); setCity("Все города"); setWorkMode("Все форматы"); setSearch(""); }}
                   className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium text-red-500 bg-red-50 border border-red-100 hover:bg-red-100 transition-all"
                 >
                   <Icon name="X" size={13} /> Сбросить
